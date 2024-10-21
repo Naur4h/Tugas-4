@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Tambah Mahasiswa</title>
+    <style>
+        h2 {
+            color: rgb(175, 30, 144);
+        }
+        #jam {
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body bgcolor="#b4fac1"> 
+    <h2>Tambah Mahasiswa</h2>
+    <div id="jam"></div>
+    <br>
+    <form id="mahasiswaForm">
+        <label for="nama">Nama: </label>
+        <input type="text" id="nama" oninput="this.value = this.value.toUpperCase();">
+        <br><br>
+        <label for="nim">NIM: </label>
+        <input type="number" id="nim">
+        <br><br>
+        <label for="jenisKelamin">Jenis Kelamin: </label>
+        <select name="Jenis Kelamin" id="jenisKelamin">
+            <option value="">--Pilih Jenis Kelamin--</option>
+            <option value="Pria">Pria</option>
+            <option value="Wanita">Wanita</option>
+        </select>
+        <br><br>
+        <button type="button" id="addForm">Tambah Form</button>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="additionalForms"></div>
+
+    <script>
+        // Menampilkan jam yang terus terupdate
+        function updateJam() {
+            const now = new Date();
+            const jam = now.toLocaleTimeString();
+            document.getElementById('jam').innerText = jam;
+        }
+        setInterval(updateJam, 1000);
+
+        // Menambah form baru
+        document.getElementById('addForm').addEventListener('click', function() {
+            const formContainer = document.getElementById('additionalForms');
+            const newForm = document.createElement('div');
+            newForm.innerHTML = `
+                <label for="nama">Nama: </label>
+                <input type="text" oninput="this.value = this.value.toUpperCase();">
+                <br><br>
+                <label for="nim">NIM: </label>
+                <input type="number">
+                <br><br>
+                <label for="jenisKelamin">Jenis Kelamin: </label>
+                <select name="Jenis Kelamin">
+                    <option value="">--Pilih Jenis Kelamin--</option>
+                    <option value="Pria">Pria</option>
+                    <option value="Wanita">Wanita</option>
+                </select>
+                <br><br>
+            `;
+            formContainer.appendChild(newForm);
+        });
+
+        // submit form
+        document.getElementById('mahasiswaForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            alert("Selamat data telah berhasil disimpan");
+            location.reload(); // Me-refresh halaman
+        });
+    </script>
+</body>
+</html>
